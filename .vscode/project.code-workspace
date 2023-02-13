@@ -1,0 +1,31 @@
+{
+  "folders": [
+    {
+      "name": "🌱 Root",
+      "path": "../"
+    },
+    {
+      "name": "👴🏻 AWT",
+      "path": "../awt"
+    },
+    {
+      "name": "✨ Swing",
+      "path": "../swing"
+    }
+  ],
+  "settings": {
+    "files.autoSave": "afterDelay",
+    "files.eol": "\n",
+    "editor.tabSize": 4,
+    "editor.useTabStops": false,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": "active",
+    "cSpell.words": [
+      "kaaaxcreators",
+    ],
+    "java.configuration.updateBuildConfiguration": "automatic"
+  },
+  "extensions": {
+    "recommendations": ["aaron-bond.better-comments", "streetsidesoftware.code-spell-checker", "streetsidesoftware.code-spell-checker-german", "visualstudioexptteam.vscodeintellicode", "vscjava.vscode-java-pack"]
+  }
+}
