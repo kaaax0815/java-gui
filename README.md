@@ -7,9 +7,18 @@
 - [JDK 17.0.6](https://adoptium.net/de/temurin/releases/)
 - [Maven 3.9.0](https://maven.apache.org/download.cgi)
 
+### Talking Points
+
+- Definition of GUI
+- Graphics components
+- AWT
+- Swing
+- Layout
+- Implementation examples
+
 ### ☕ Java Support
 
-For best results, install the [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)
+For best experience, install the [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)
 
 ### 📜 License
 
