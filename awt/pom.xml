@@ -76,7 +76,7 @@
           <configuration>
             <mainClass>de.kaaaxcreators.awt.App</mainClass>
           </configuration>
-      </plugin>
+        </plugin>
       </plugins>
     </pluginManagement>
   </build>
