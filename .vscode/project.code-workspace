@@ -23,7 +23,15 @@
     "cSpell.words": [
       "kaaaxcreators",
     ],
-    "java.configuration.updateBuildConfiguration": "automatic"
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.completion.filteredTypes": [
+      "com.sun.*",
+      "sun.*",
+      "jdk.*",
+      "org.graalvm.*",
+      "io.micrometer.shaded.*"
+    ],
+    "java.format.settings.url": "eclipse-formatter.xml"
   },
   "extensions": {
     "recommendations": ["aaron-bond.better-comments", "streetsidesoftware.code-spell-checker", "streetsidesoftware.code-spell-checker-german", "visualstudioexptteam.vscodeintellicode", "vscjava.vscode-java-pack"]
