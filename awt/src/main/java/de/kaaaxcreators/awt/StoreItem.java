@@ -1,5 +1,8 @@
 package de.kaaaxcreators.awt;
 
+/**
+ * Datatype for items in the store.
+ */
 public class StoreItem implements Cloneable {
     private String name;
     private String description;
