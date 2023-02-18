@@ -9,10 +9,11 @@ public class ItemsList {
     }
 
     ListItem[] getList() {
-        ListItem[] items = new ListItem[5];
-        items[0] = new ListItem("Banane", "Leckere gelbe Banane", 2);
-        items[1] = new ListItem("Coca Cola", "Erfrischendes Erfrischungsgetränk", 3);
-        items[2] = new ListItem("Schokolade", "So süüß", 1);
+        ListItem[] items = {
+            new ListItem("Banane", "Leckere gelbe Banane", 2),
+            new ListItem("Coca Cola", "Erfrischendes Erfrischungsgetränk", 3),
+            new ListItem("Schokolade", "So süüß", 1),
+        };
         return items;
     }
     class ListItem {
