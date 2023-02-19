@@ -3,7 +3,7 @@ package de.kaaaxcreators.swing;
 import javax.swing.*;
 
 public class Select extends JPanel {
-    static String isSelected = Selectable.car;
+    Selectable selectItem = Selectable.CAR;
 
     public Select() {
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
@@ -11,11 +11,11 @@ public class Select extends JPanel {
     }
 
     void init() {
-        JButton carButton = new JButton("Cars"); 
-        JButton motorcycleButton = new JButton("Motorcycle");
+        JButton carButton = new JButton("Auto"); 
+        JButton motorcycleButton = new JButton("Motorrad");
         JButton ownPhotoButton = new JButton("Eigenes");
 
-        Clicklistener click = new Clicklistener(motorcycleButton, carButton, ownPhotoButton);
+        ClickListener click = new ClickListener(motorcycleButton, carButton, ownPhotoButton);
         carButton.addActionListener(click);
         motorcycleButton.addActionListener(click);
         ownPhotoButton.addActionListener(click);
@@ -23,13 +23,5 @@ public class Select extends JPanel {
         add(carButton);
         add(motorcycleButton);
         add(ownPhotoButton);
-        }
-    
-
-    void update() {
-        removeAll();
-        init();
-        revalidate();
-        repaint();
     }
 }

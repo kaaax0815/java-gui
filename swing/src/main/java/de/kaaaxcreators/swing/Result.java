@@ -1,45 +1,42 @@
 package de.kaaaxcreators.swing;
 
-import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.Component;
 
 import javax.swing.*;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
 
 public class Result extends JPanel {
+    DragAndDropHandler dndHandler;
     public Result() {
         init();
     }
 
     void init() {
-        JLabel jLabel;
-        if(Select.isSelected == Selectable.motorcycle) {
-            ImageIcon imageIcon = ImageUtils.ImageIconByResourcePath("BMW-S1000RR.jpg");
-            imageIcon.setImage(ImageUtils.resizeToHeight(imageIcon.getImage(), 200));
-            jLabel = new JLabel(imageIcon);
-            jLabel.setToolTipText("BMW S1000RR");
+        Component jLabel;
+        switch (App.select.selectItem) {
+            case CAR:
+                ImageIcon carIcon = ImageUtils.ImageIconByResourcePath("TESLA-MODELX.jpeg");
+                carIcon.setImage(ImageUtils.resizeToHeight(carIcon.getImage(), 200));
+                JLabel carLabel = new JLabel(carIcon);
+                carLabel.setToolTipText("Tesla Model X");
+                jLabel = carLabel;
+                break;
+            case MOTORCYCLE:
+                ImageIcon motorIcon = ImageUtils.ImageIconByResourcePath("BMW-S1000RR.jpg");
+                motorIcon.setImage(ImageUtils.resizeToHeight(motorIcon.getImage(), 200));
+                JLabel motorLabel = new JLabel(motorIcon);
+                motorLabel.setToolTipText("BMW S1000RR");
+                jLabel = motorLabel;
+                break;
+            case OWN:
+                if (dndHandler == null) {
+                    dndHandler = new DragAndDropHandler();
+                }
+                jLabel = dndHandler;
+                break;
+            default:
+                jLabel = new JLabel("Error");
+                break;
         }
-        else if (Select.isSelected == Selectable.own) {
-            if(App.filePath != null) {
-                ImageIcon imageIcon = ImageUtils.ImageIconByAbsolutePath(App.filePath.toString());
-                imageIcon.setImage(ImageUtils.resizeToHeight(imageIcon.getImage(), 200));
-                jLabel = new JLabel(imageIcon);
-                jLabel.setToolTipText("Eigenes Bild");
-                DragAndDropHandler.handleDragAndDrop(jLabel);
-            }
-            else {
-                jLabel = new JLabel("Drag and Drop", JLabel.CENTER);
-                jLabel.setBorder(new CompoundBorder(BorderFactory.createLineBorder(Color.BLACK, 5), new EmptyBorder(80, 80, 80, 80)));
-                DragAndDropHandler.handleDragAndDrop(jLabel);
-            }
-        }
-        else {
-            ImageIcon imageIcon = ImageUtils.ImageIconByResourcePath("TESLA-MODELX.jpeg");
-            imageIcon.setImage(ImageUtils.resizeToHeight(imageIcon.getImage(), 200));
-            jLabel = new JLabel(imageIcon);
-            jLabel.setToolTipText("Tesla Model X");
-        } 
         add(jLabel);
     }
 
@@ -49,6 +46,4 @@ public class Result extends JPanel {
         revalidate();
         repaint();
     }
-
-    
 }

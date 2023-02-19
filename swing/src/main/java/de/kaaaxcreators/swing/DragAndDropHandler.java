@@ -1,59 +1,87 @@
 package de.kaaaxcreators.swing;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
-import java.awt.dnd.DropTarget;
-import java.awt.dnd.DropTargetDragEvent;
-import java.awt.dnd.DropTargetDropEvent;
-import java.awt.dnd.DropTargetEvent;
-import java.awt.dnd.DropTargetListener;
+import java.awt.dnd.*;
 import java.io.File;
-import java.util.ArrayList;
+import java.util.List;
 
-public class DragAndDropHandler {
-    // user should be able to drop an image on whole window
-    static void handleDragAndDrop(Component _dragAndDropComponent) {
-        new DropTarget(_dragAndDropComponent, new DropTargetListener() {
-    	    @Override
+import javax.swing.*;
+
+public class DragAndDropHandler extends JPanel {
+	JLabel jLabel;
+	File selectedFile;
+	public DragAndDropHandler() {
+		setLayout(new BorderLayout());
+
+		// html for word wrap
+		jLabel = new JLabel("<html><p style=\"text-align: center\">Ziehen Sie ein Bild per Drag & Drop hierher</p></html>", JLabel.CENTER);
+		jLabel.setPreferredSize(new Dimension(200, 200));
+		handleDragAndDrop(jLabel);
+		add(jLabel, BorderLayout.CENTER);
+	}
+
+	void update() {
+		ImageIcon imageIcon = ImageUtils.ImageIconByAbsolutePath(selectedFile.getAbsolutePath());
+		imageIcon.setImage(ImageUtils.resizeToHeight(imageIcon.getImage(), 200));
+		jLabel.setIcon(imageIcon);
+		jLabel.setText(null);
+		jLabel.setToolTipText(selectedFile.getName());
+		// use size of image
+		jLabel.setPreferredSize(null);
+	}
+
+    void handleDragAndDrop(Component dragAndDropComponent) {
+        new DropTarget(dragAndDropComponent, new DropTargetListener() {
     	    public void drop(DropTargetDropEvent dtde) {
-        		try {
-                    System.out.println("erreicht");
-        		    Transferable tr = dtde.getTransferable();
-        		    DataFlavor[] flavors = tr.getTransferDataFlavors();
-        		    ArrayList<File> fileNames = new ArrayList<File>();
-        		    for (int i = 0; i < flavors.length; i++) {
-                        System.out.println(flavors.length);
-                        // all the different flavors only have one single image file
-            			if (flavors[i].isFlavorJavaFileListType()) {
-                            System.out.println(flavors[i]);
-            			    dtde.acceptDrop(dtde.getDropAction());
-            			    @SuppressWarnings("unchecked")
-            			    java.util.List<File> files = (java.util.List<File>) tr.getTransferData(flavors[i]);
-            			    for (int k = 0; k < files.size(); k++) {
-            				    fileNames.add(files.get(k));
-            			    }
-                            // as soon as path is found, update the views
-                            App.filePath = fileNames.get(0);
-                            System.out.println(App.filePath);
-                            App.result.update();
-                            App.select.update();
+				if (!dtde.isDataFlavorSupported(DataFlavor.javaFileListFlavor)) {
+		    		dtde.rejectDrop();
+					return;
+				}
+				try {
+					Transferable transferable = dtde.getTransferable();
+					dtde.acceptDrop(dtde.getDropAction());
+					Object transferData = transferable.getTransferData(DataFlavor.javaFileListFlavor);
+					// unsafe cast but we know it's a List<File>
+					@SuppressWarnings("unchecked")
+					List<File> files = (List<File>)transferData;
+					File file = files.get(0);
+					
+					if (!canAcceptFile(file)) {
+						dtde.dropComplete(false);
+						return;
+					}
 
-            			    dtde.dropComplete(true);
-            			}
-        		    }
-        		    return;
-        		}
-        		catch (Throwable t) {
-        		    t.printStackTrace();
-        		}
-        		dtde.rejectDrop();	
+					selectedFile = file;
+
+					update();
+
+					dtde.dropComplete(true);
+					return;
+				}
+				catch (Exception ex) {
+					ex.printStackTrace();
+					dtde.dropComplete(false);
+				}
     	    }
 
-            @Override public void dragEnter(DropTargetDragEvent dtde) {}
-            @Override public void dragOver(DropTargetDragEvent dtde) {}
-            @Override public void dropActionChanged(DropTargetDragEvent dtde) {}
-            @Override public void dragExit(DropTargetEvent dte) {}
+            public void dragEnter(DropTargetDragEvent dtde) {}
+            public void dragOver(DropTargetDragEvent dtde) {}
+            public void dropActionChanged(DropTargetDragEvent dtde) {}
+            public void dragExit(DropTargetEvent dte) {}
     	});
     }
+
+	boolean canAcceptFile(File file) {
+		String[] allowedExtensions = { "jpg", "jpeg", "png", "gif" };
+		for (String extension : allowedExtensions) {
+			if (file.getName().toLowerCase().endsWith(extension)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
