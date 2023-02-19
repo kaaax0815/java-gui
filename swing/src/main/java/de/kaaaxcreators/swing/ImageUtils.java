@@ -17,7 +17,11 @@ public class ImageUtils {
         return newImage;
     }
 
-    static ImageIcon ImageIconByPath(String path) {
+    static ImageIcon ImageIconByResourcePath(String path) {
         return new ImageIcon(ImageUtils.class.getClassLoader().getResource(path));
+    }
+
+    static ImageIcon ImageIconByAbsolutePath(String path) {
+        return new ImageIcon(path);
     }
 }
