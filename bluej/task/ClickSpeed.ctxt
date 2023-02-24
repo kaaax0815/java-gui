@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=ClickSpeed
+comment1.params=
+comment1.target=ClickSpeed()
+comment2.params=
+comment2.target=void\ click()
+comment3.params=
+comment3.target=void\ tick()
+comment4.params=
+comment4.target=void\ reset()
+comment4.text=\r\n\ Werte\ zur\u00FCcksetzen\r\n
+comment5.params=
+comment5.target=void\ init()
+comment5.text=\r\n\ Timer\ einrichten\r\n
+comment6.params=
+comment6.target=void\ run()
+numComments=7

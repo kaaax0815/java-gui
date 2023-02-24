@@ -6,6 +6,7 @@
 
 - [JDK 17.0.6](https://adoptium.net/de/temurin/releases/)
 - [Maven 3.9.0](https://maven.apache.org/download.cgi)
+- [BlueJ 5.1.0](https://www.bluej.org/)
 
 ### Talking Points
 
